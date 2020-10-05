@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Covid-19 Cases Viewer</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+    <script src="/script.js"></script>
+</head>
+<body>
+    <h1 id="uebersicht">Übersicht Bayern - Welt</h1>
+    <table id="tableBayernWelt">
+        <caption>
+        Tabelle 01: Coronavirusinfektionen, Stand: 
+        <script>document.write(publikationsDatum);</script>, 08:00 Uhr. Die Zahlen werden werktäglich  aktualisiert.
+        </caption>
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Fälle</th>
+            <th>Todesfälle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:left">Welt<sup>1)</sup></td>
+            <td>34.804.348</td>
+            <td>1.030.738</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">EU / EEA / UK<sup>2)</sup></td>
+            <td>3.517.651</td>
+            <td>191.576</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Deutschland<sup>3)</sup></td>
+            <td>300.619</td>
+            <td>9.534</td>
+          </tr>
+          <tr>
+            <td style="text-align:left">Bayern</td>
+            <td>69.641</td>
+            <td>2.670</td>
+          </tr>
+        </tbody>
+      </table>
+</body>
+</html>
