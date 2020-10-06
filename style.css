@@ -9,13 +9,3 @@ h1 {
   font-style: italic;
   color: #373fff;
 }
-
-table {
-    width: 100%;
-    background-color: transparent;
-    font-size: 0.875rem;
-    border: none;
-    margin-bottom: 0.25rem !important;
-    box-sizing: border-box;
-    border-collapse: collapse;
-}
