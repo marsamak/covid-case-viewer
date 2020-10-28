@@ -16,11 +16,9 @@ function fillTableFromDict(summaryTableData) {
 }
 
 function getEUSummary(allCountries) {
-  debugger;
   var EUCodes = Object.keys(EUCountries).map(key => EUCountries[key]);
   EUCodes = EUCodes.concat(Object.keys(EEACountries).map(key => EEACountries[key]));
   EUCodes = EUCodes.concat(Object.keys(UKCountries).map(key => UKCountries[key]));
-  console.log(EUCodes);
   const EUData = allCountries.filter(country => EUCodes.includes(country.CountryCode));
   const EUSummary = EUData.reduce((accumulator, country) => {
     accumulator.casesEU += country.TotalConfirmed;
@@ -45,7 +43,6 @@ function updateSummaryTable() {
   fetch(summaryRequest, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      console.log(result);
       const summaryDE = result.Countries.find(country => country.CountryCode == EUCountries.Germany);
       const summaryEU = getEUSummary(result.Countries);
       const summaryTableData = {
