@@ -16,9 +16,9 @@ function fillTableFromDict(summaryTableData) {
 }
 
 function getEUSummary(allCountries) {
-  var EUCodes = Object.keys(EUCountries).map(key => EUCountries[key]);
-  EUCodes = EUCodes.concat(Object.keys(EEACountries).map(key => EEACountries[key]));
-  EUCodes = EUCodes.concat(Object.keys(UKCountries).map(key => UKCountries[key]));
+  var EUCodes = Object.keys(EUCountries);
+  EUCodes = EUCodes.concat(Object.keys(EEACountries));
+  EUCodes = EUCodes.concat(Object.keys(UKCountries));
   const EUData = allCountries.filter(country => EUCodes.includes(country.CountryCode));
   const EUSummary = EUData.reduce((accumulator, country) => {
     accumulator.casesEU += country.TotalConfirmed;
@@ -43,7 +43,7 @@ function updateSummaryTable() {
   fetch(summaryRequest, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      const summaryDE = result.Countries.find(country => country.CountryCode == EUCountries.Germany);
+      const summaryDE = result.Countries.find(country => country.CountryCode == "DE");
       const summaryEU = getEUSummary(result.Countries);
       const summaryTableData = {
         casesWorldwide: result.Global.TotalConfirmed.toLocaleString(),
