@@ -1,42 +1,44 @@
-const EUCountries = {
-  Austria:      "AT",
-  Belgium:      "BE",
-  Bulgaria:     "BG",
-  Croatia:      "HR",
-  Cyprus:       "CY",
-  Czechia:      "CZ",
-  Denmark:      "DK",
-  Estonia:      "EE",
-  Finland:      "FI",
-  France:       "FR",
-  Germany:      "DE",
-  Greece:       "GR",
-  Hungary:      "HU",
-  Ireland:      "IE",
-  Italy:        "IT",
-  Latvia:       "LV",
-  Lithuania:    "LT",
-  Luxembourg:   "LU",
-  Malta:        "MT",
-  Netherlands:  "NL",
-  Poland:       "PL",
-  Portugal:     "PT",
-  Romania:      "RO",
-  Slovakia:     "SK",
-  Slovenia:     "SI",
-  Spain:        "ES",
-  Sweden:       "SE",
+const EUCountries = {  
+  AT: "Austria",
+  BE: "Belgium",
+  BG: "Bulgaria",
+  HR: "Croatia",
+  CY: "Cyprus" ,
+  CZ: "Czechia",
+  DK: "Denmark",
+  EE: "Estonia",
+  FI: "Finland",
+  FR: "France",
+  DE: "Germany",
+  GR: "Greece",
+  HU: "Hungary",
+  IE: "Ireland",
+  IT: "Italy",
+  LV: "Latvia",
+  LT: "Lithuania",
+  LU: "Luxembourg",
+  MT: "Malta",
+  NL: "Netherlands",
+  PL: "Poland",
+  PT: "Portugal",
+  RO: "Romania",
+  SK: "Slovakia",
+  SI: "Slovenia",
+  ES: "Spain",
+  SE: "Sweden"
 };
 
 const UKCountries = {
-  United_Kingdom:   "GB"
+  GB : "United_Kingdom"
 };
 
 const EEACountries = {
-    Iceland:        "IS",
-    Liechtenstein:  "LI",
-    Norway:         "NO"
+  IS: "Iceland",
+  LI: "Liechtenstein",
+  NO: "Norway"
 }
+
+//list of all the countries with codes, mb I'll need it later
 
 // const isoCountries = {
 //   AF: "Afghanistan",
