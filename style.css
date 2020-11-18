@@ -5,9 +5,17 @@ body {
   margin: 2em;
 }
 
+.table-hover>tbody>tr:hover {
+  background-color: #f5f5f5;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #bee3f8;
+}
+
 h1 {
-  font-style: italic;
-  color: #373fff;
+  font-weight: bold;
+  color: #2c5282;
 }
 * {box-sizing: border-box;}
 
@@ -18,8 +26,8 @@ h1 {
 }
 
 .wrapper > * {
-    border: 2px solid #f08c00;
-    background-color: #ffec99;
+    border: 2px solid #bee3f8;
+    background-color:#ebf8ff;
     border-radius: 5px;
     padding: 10px;
 }
@@ -28,6 +36,20 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    max-height: 300px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav ul a {
+    color: initial;
+    text-decoration: none;
+}
+
+nav ul a:hover{
+  color:#2b6cb0;
+  font-weight: bolder;
+  text-decoration: none;
 }
 
 .main-head {

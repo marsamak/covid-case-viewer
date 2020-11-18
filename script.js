@@ -16,9 +16,7 @@ function fillTableFromDict(summaryTableData) {
 }
 
 function getEUSummary(allCountries) {
-  var EUCodes = Object.keys(EUCountries);
-  EUCodes = EUCodes.concat(Object.keys(EEACountries));
-  EUCodes = EUCodes.concat(Object.keys(UKCountries));
+  const EUCodes = Object.keys(Object.assign(EUCountries, EEACountries, UKCountries)); 
   const EUData = allCountries.filter(country => EUCodes.includes(country.CountryCode));
   const EUSummary = EUData.reduce((accumulator, country) => {
     accumulator.casesEU += country.TotalConfirmed;
@@ -43,6 +41,7 @@ function updateSummaryTable() {
   fetch(summaryRequest, requestOptions)
     .then((response) => response.json())
     .then((result) => {
+
       const summaryDE = result.Countries.find(country => country.CountryCode == "DE");
       const summaryEU = getEUSummary(result.Countries);
       const summaryTableData = {
@@ -51,12 +50,39 @@ function updateSummaryTable() {
         casesEU: summaryEU.casesEU.toLocaleString(),
         deathsEU: summaryEU.deathsEU.toLocaleString(),
         casesGermany: summaryDE.TotalConfirmed.toLocaleString(),
-        deathsGermany: summaryDE.TotalDeaths.toLocaleString(),
-        casesBavaria: Number(0).toLocaleString(),
-        deathsBavaria: Number(0).toLocaleString(),
+        deathsGermany: summaryDE.TotalDeaths.toLocaleString()
       };
 
       fillTableFromDict(summaryTableData);
+
+      fillCountriesList();
     })
     .catch((error) => console.log("error", error));
 }
+
+function changeCountryHandler(e) {
+
+  //e.preventDefault();
+  document.querySelector("#overview").innerText = allCountries[e.target.href.split('#')[1]];
+}
+
+function fillCountriesList() {
+  const countriesULElem = document.querySelector("#countriesUL");
+  Object.keys(allCountries).forEach(countryCode => {
+    const newCountryItem = document.createElement("li");
+    const anchor = document.createElement("a");
+    anchor.textContent = allCountries[countryCode];
+    anchor.setAttribute('href', "#" + countryCode);
+    anchor.addEventListener("click", changeCountryHandler);
+    newCountryItem.appendChild(anchor);
+    countriesULElem.appendChild(newCountryItem);
+  });
+
+}
+
+window.addEventListener("load", e => {
+document.querySelector("#overview").innerText = allCountries[window.location.hash.substr(1)]});
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   document.querySelector("#overview").innerText = allCountries[window.location.hash.substr(1)]
+// });

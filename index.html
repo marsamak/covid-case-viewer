@@ -7,8 +7,8 @@
     <title>Covid-19 Cases Viewer</title>
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     
     <!-- import the webpage's javascript file -->
     <script src="country_codes.js"></script>
@@ -18,14 +18,10 @@
     <div class="wrapper">
         <header class="main-head">The header</header>
         <nav class="main-nav">
-            <ul>
-                <li><a href="">Nav 1</a></li>
-                <li><a href="">Nav 2</a></li>
-                <li><a href="">Nav 3</a></li>
-            </ul>
+            <ul id="countriesUL"></ul>
         </nav>
         <article class="content">
-            <h1 id="overview">Overview Bavaria - Worldwide</h1>
+            <h1 id="overview">Overview Germany - Worldwide</h1>
             <div class="table-responsive">
                 <table class="table table-striped table-hover table-sm" id="summaryTable">
                     <caption>
@@ -54,11 +50,6 @@
                             <td style="text-align:left">Germany</td>
                             <td id="casesGermany"></td>
                             <td id="deathsGermany"></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align:left">Bavaria</td>
-                            <td id="casesBavaria"></td>
-                            <td id="deathsBavaria"></td>
                         </tr>
                     </tbody>
               </table>
