@@ -29,7 +29,7 @@ const EUCountries = {
 };
 
 const UKCountries = {
-  GB : "United_Kingdom"
+  GB: "United_Kingdom"
 };
 
 const EEACountries = {

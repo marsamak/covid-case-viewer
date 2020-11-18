@@ -16,9 +16,7 @@ function fillTableFromDict(summaryTableData) {
 }
 
 function getEUSummary(allCountries) {
-  var EUCodes = Object.keys(EUCountries);
-  EUCodes = EUCodes.concat(Object.keys(EEACountries));
-  EUCodes = EUCodes.concat(Object.keys(UKCountries));
+  const EUCodes = Object.keys(Object.assign(EUCountries, EEACountries, UKCountries));
   const EUData = allCountries.filter(country => EUCodes.includes(country.CountryCode));
   const EUSummary = EUData.reduce((accumulator, country) => {
     accumulator.casesEU += country.TotalConfirmed;
