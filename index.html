@@ -7,47 +7,51 @@
     <title>Covid-19 Cases Viewer</title>
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     
     <!-- import the webpage's javascript file -->
-    <script src="/script.js"></script>
+    <script src="country_codes.js"></script>
+    <script src="script.js"></script>
 </head>
-<body>
-    <h1 id="uebersicht">Übersicht Bayern - Welt</h1>
-    <table id="tableBayernWelt">
-        <caption>
-        Tabelle 01: Coronavirusinfektionen, Stand: 
-        <script>document.write(publikationsDatum);</script>, 08:00 Uhr. Die Zahlen werden werktäglich  aktualisiert.
-        </caption>
-        <thead>
-          <tr>
-            <th>Region</th>
-            <th>Fälle</th>
-            <th>Todesfälle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="text-align:left">Welt<sup>1)</sup></td>
-            <td>34.804.348</td>
-            <td>1.030.738</td>
-          </tr>
-          <tr>
-            <td style="text-align:left">EU / EEA / UK<sup>2)</sup></td>
-            <td>3.517.651</td>
-            <td>191.576</td>
-          </tr>
-          <tr>
-            <td style="text-align:left">Deutschland<sup>3)</sup></td>
-            <td>300.619</td>
-            <td>9.534</td>
-          </tr>
-          <tr>
-            <td style="text-align:left">Bayern</td>
-            <td>69.641</td>
-            <td>2.670</td>
-          </tr>
-        </tbody>
+<body onload="updateSummaryTable()">
+    <h1 id="overview">Overview Bavaria - Worldwide</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-sm" id="summaryTable">
+            <caption>
+                Table 01: Cases overview, last updated: 
+                <script>document.write(publikationsDatum);</script>, 00:00 Uhr.
+            </caption>
+            <thead>
+                <tr>
+                    <th scope="col">Region</th>
+                    <th scope="col">Cases</th>
+                    <th scope="col">Deaths</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align:left">Worldwide</td>
+                    <td id="casesWorldwide"></td>
+                    <td id="deathsWorldwide"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">EU / EEA / UK</td>
+                    <td id="casesEU"></script></td>
+                    <td id="deathsEU"></script></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">Germany</td>
+                    <td id="casesGermany"></td>
+                    <td id="deathsGermany"></td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">Bavaria</td>
+                    <td id="casesBavaria"></td>
+                    <td id="deathsBavaria"></td>
+                </tr>
+            </tbody>
       </table>
+    </div>
 </body>
 </html>
