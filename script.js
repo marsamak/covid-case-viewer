@@ -1,3 +1,5 @@
+var publikationsDatum = getCurrentDate(); //setting a current date
+
 function getCurrentDate() {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
@@ -7,7 +9,6 @@ function getCurrentDate() {
   today = dd + "." + mm + "." + yyyy;
   return today;
 }
-var publikationsDatum = getCurrentDate(); //setting a current date
 
 function fillTableFromDict(summaryTableData) {
   for (let elementId in summaryTableData) {
@@ -60,10 +61,16 @@ function updateSummaryTable() {
     .catch((error) => console.log("error", error));
 }
 
+let countryHeaderElement;
+document.addEventListener('DOMContentLoaded', () => {
+  countryHeaderElement = document.querySelector("#countryH2");
+});
 function changeCountryHandler(e) {
-
-  //e.preventDefault();
-  document.querySelector("#overview").innerText = allCountries[e.target.href.split('#')[1]];
+  const countryCode = window.location.hash.substr(1);
+  if (countryCode != "")
+    countryHeaderElement.innerText = allCountries[window.location.hash.substr(1)];
+  else
+    countryHeaderElement.innerText = "Covid-19 Cases Viewer";
 }
 
 function fillCountriesList() {
@@ -73,16 +80,12 @@ function fillCountriesList() {
     const anchor = document.createElement("a");
     anchor.textContent = allCountries[countryCode];
     anchor.setAttribute('href', "#" + countryCode);
-    anchor.addEventListener("click", changeCountryHandler);
+    //anchor.addEventListener("click", changeCountryHandler);
     newCountryItem.appendChild(anchor);
     countriesULElem.appendChild(newCountryItem);
   });
 
 }
 
-window.addEventListener("load", e => {
-document.querySelector("#overview").innerText = allCountries[window.location.hash.substr(1)]});
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   document.querySelector("#overview").innerText = allCountries[window.location.hash.substr(1)]
-// });
+window.addEventListener("load", changeCountryHandler);
+window.addEventListener("hashchange", changeCountryHandler);
