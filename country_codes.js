@@ -3,23 +3,25 @@ let allCountries;
 function getCountriesListPromise() {
   const countriesUrl = "https://api.covid19api.com/countries";
   return fetch(countriesUrl)
-  .then((response) => response.json())
-  .then((countries) => {
-    //countries here is an array of Country objects like {Country: "Argentina", Slug: "argentina", ISO2: "AR"}
-    allCountries = countries.sort((country1, country2) => (country1.Country.localeCompare(country2.Country)));
-    //return allCountries;
-  })
-  .catch(error => {
-    console.error("Error: ", error);
-  });
+    .then((response) => response.json())
+    .then((countries) => {
+      //countries here is an array of Country objects like {Country: "Argentina", Slug: "argentina", ISO2: "AR"}
+      allCountries = countries.sort((country1, country2) =>
+        country1.Country.localeCompare(country2.Country)
+      );
+      //return allCountries;
+    })
+    .catch((error) => {
+      console.error("Error: ", error);
+    });
 }
 
-const EUCountries = {  
+const EUCountries = {
   AT: "Austria",
   BE: "Belgium",
   BG: "Bulgaria",
   HR: "Croatia",
-  CY: "Cyprus" ,
+  CY: "Cyprus",
   CZ: "Czechia",
   DK: "Denmark",
   EE: "Estonia",
@@ -52,7 +54,7 @@ const EEACountries = {
   IS: "Iceland",
   LI: "Liechtenstein",
   NO: "Norway"
-}
+};
 
 //list of all the countries with codes, mb I'll need it later
 // const allCountries = {
