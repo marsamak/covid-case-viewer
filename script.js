@@ -16,9 +16,9 @@ function fillTableFromDict(summaryTableData) {
   }
 }
 
-function getEUSummary(allCountries) {
+function getEUSummary(allCountriesSummaryData) {
   const EUCodes = Object.keys(Object.assign(EUCountries, EEACountries, UKCountries)); 
-  const EUData = allCountries.filter(country => EUCodes.includes(country.CountryCode));
+  const EUData = allCountriesSummaryData.filter(country => EUCodes.includes(country.CountryCode));
   const EUSummary = EUData.reduce((accumulator, country) => {
     accumulator.casesEU += country.TotalConfirmed;
     accumulator.deathsEU += country.TotalDeaths;
@@ -30,62 +30,61 @@ function getEUSummary(allCountries) {
   return EUSummary;
 }
 
-function updateSummaryTable() {
-  //here we fill our summaryTableData with numbers
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
+function getSummaryDataPromise() {
+  const summaryRequest = "https://api.covid19api.com/summary";
 
-  var summaryRequest = "https://api.covid19api.com/summary";
-
-  fetch(summaryRequest, requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-
-      const summaryDE = result.Countries.find(country => country.CountryCode == "DE");
-      const summaryEU = getEUSummary(result.Countries);
-      const summaryTableData = {
-        casesWorldwide: result.Global.TotalConfirmed.toLocaleString(),
-        deathsWorldwide: result.Global.TotalDeaths.toLocaleString(),
-        casesEU: summaryEU.casesEU.toLocaleString(),
-        deathsEU: summaryEU.deathsEU.toLocaleString(),
-        casesGermany: summaryDE.TotalConfirmed.toLocaleString(),
-        deathsGermany: summaryDE.TotalDeaths.toLocaleString()
-      };
-
-      fillTableFromDict(summaryTableData);
-
-      fillCountriesList();
-    })
-    .catch((error) => console.log("error", error));
+  return fetch(summaryRequest)
+  .then((response) => response.json())
+  .then((result) => {
+    const summaryDE = result.Countries.find(country => country.CountryCode == "DE");
+    const summaryEU = getEUSummary(result.Countries);
+    const summaryTableData = {
+      casesWorldwide: result.Global.TotalConfirmed.toLocaleString(),
+      deathsWorldwide: result.Global.TotalDeaths.toLocaleString(),
+      casesEU: summaryEU.casesEU.toLocaleString(),
+      deathsEU: summaryEU.deathsEU.toLocaleString(),
+      casesGermany: summaryDE.TotalConfirmed.toLocaleString(),
+      deathsGermany: summaryDE.TotalDeaths.toLocaleString()
+    };
+    fillTableFromDict(summaryTableData);
+  })
+  .catch((error) => console.log("Error: ", error));
 }
 
 let countryHeaderElement;
 document.addEventListener('DOMContentLoaded', () => {
   countryHeaderElement = document.querySelector("#countryH2");
 });
+
 function changeCountryHandler(e) {
   const countryCode = window.location.hash.substr(1);
-  if (countryCode != "")
-    countryHeaderElement.innerText = allCountries[window.location.hash.substr(1)];
+  if (countryCode != "" && allCountries !== undefined)
+
+    countryHeaderElement.innerText = allCountries.find(country => (country.ISO2 == window.location.hash.substr(1))).Country;
   else
     countryHeaderElement.innerText = "Covid-19 Cases Viewer";
 }
 
 function fillCountriesList() {
   const countriesULElem = document.querySelector("#countriesUL");
-  Object.keys(allCountries).forEach(countryCode => {
+  allCountries.forEach(country => {
     const newCountryItem = document.createElement("li");
     const anchor = document.createElement("a");
-    anchor.textContent = allCountries[countryCode];
-    anchor.setAttribute('href', "#" + countryCode);
+    anchor.textContent = country.Country;
+    anchor.setAttribute('href', "#" + country.ISO2);
     //anchor.addEventListener("click", changeCountryHandler);
     newCountryItem.appendChild(anchor);
     countriesULElem.appendChild(newCountryItem);
   });
-
 }
 
 window.addEventListener("load", changeCountryHandler);
 window.addEventListener("hashchange", changeCountryHandler);
+
+const countriesListPromise = getCountriesListPromise();
+const summaryDataPromise = getSummaryDataPromise();
+countriesListPromise.then(() => {
+  summaryDataPromise.then(()=>{
+    fillCountriesList();
+  })
+});
